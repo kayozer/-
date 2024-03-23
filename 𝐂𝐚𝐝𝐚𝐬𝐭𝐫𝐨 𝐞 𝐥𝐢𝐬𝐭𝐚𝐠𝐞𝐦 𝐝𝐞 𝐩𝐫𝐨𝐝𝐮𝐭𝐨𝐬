@@ -1,0 +1,46 @@
+class Produto:
+    def __init__(self, nome, descricao, valor, disponivel_para_venda):
+        self.nome = nome
+        self.descricao = descricao
+        self.valor = valor
+        self.disponivel_para_venda = disponivel_para_venda
+
+produtos = []
+
+def cadastrar_produto():
+    print("\nCADASTRO DE PRODUTO")
+    nome = input("Nome do produto: ")
+    descricao = input("Descrição do produto: ")
+    valor = float(input("Valor do produto: "))
+    disponivel_para_venda = input("Disponível para venda (sim/não): ").lower() == "sim"
+
+    produtos.append(Produto(nome, descricao, valor, disponivel_para_venda))
+    print("Produto cadastrado com sucesso!")
+
+def listar_produtos():
+    if not produtos:
+        print("Nenhum produto cadastrado ainda.")
+        return
+
+    print("\nLISTA DE PRODUTOS:")
+    print("{:<20} {:<10}".format("Nome", "Valor"))
+    print("------------------------------------")
+    for produto in sorted(produtos, key=lambda p: p.valor):
+        print("{:<20} R$ {:.2f}".format(produto.nome, produto.valor))
+
+while True:
+    print("\nMENU:")
+    print("1 - Cadastrar Produto")
+    print("2 - Listar Produtos")
+    print("0 - Sair")
+    opcao = input("Escolha uma opção: ")
+
+    if opcao == "1":
+        cadastrar_produto()
+    elif opcao == "2":
+        listar_produtos()
+    elif opcao == "0":
+        print("Saindo...")
+        break
+    else:
+        print("Opção inválida! Tente novamente.")
